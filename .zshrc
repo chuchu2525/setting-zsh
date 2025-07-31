@@ -1,3 +1,6 @@
+# Enable prompt substitution
+setopt PROMPT_SUBST
+
 # Git branch function
 git_branch() {
     local branch=$(git branch 2>/dev/null | grep '^*' | sed 's/* //')
