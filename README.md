@@ -11,8 +11,7 @@ mac の zsh でカスタムプロンプトと Git ブランチ表示を設定す
 ## プロンプトの見た目
 
 ```
-yutti@mac : ~/Documents/Project/setting-zsh
-<main>
+yutti@mac : ~/Documents/Project/setting-zsh <main>
 $
 ```
 
@@ -145,8 +144,7 @@ echo -e "\e[38;5;40mこの色が気に入りましたか？\e[0m"
 `yutti@mac`の部分を変更したい場合は、以下の行を編集してください：
 
 ```bash
-export PS1='%F{40}your_name@your_hostname%f %F{15}:%f %F{39}%~%f
-%F{43}$(git_branch)%f
+export PS1='%F{40}your_name@your_hostname%f %F{15}:%f %F{39}%~%f %F{43}$(git_branch)%f
 %F{15}$%f '
 ```
 
