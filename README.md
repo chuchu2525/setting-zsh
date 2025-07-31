@@ -31,23 +31,43 @@ cd setting-zsh
 cp ~/.zshrc ~/.zshrc.backup
 ```
 
-### 3. 設定ファイルを適用
+### 3. 設定を既存の.zshrc に追加
 
-以下のいずれかの方法で設定を適用してください：
+以下のいずれかの方法で設定を追加してください：
 
-#### 方法 A: ファイルを直接コピー
+#### 方法 A: 手動で設定を追加（推奨）
+
+`.zshrc`ファイルの内容を確認してから、以下の設定を既存の`~/.zshrc`の**末尾**に追記してください：
 
 ```bash
-cp .zshrc ~/.zshrc
+# プロンプト設定の有効化
+setopt PROMPT_SUBST
+
+# カスタムプロンプト設定とGitブランチ表示
+git_branch() {
+    local branch_name
+    branch_name=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+    if [ -n "$branch_name" ]; then
+        echo "<$branch_name>"
+    fi
+}
+
+export PS1='%F{40}yutti@mac%f %F{15}:%f %F{39}%~%f
+%F{43}$(git_branch)%f
+%F{15}$%f '
 ```
 
-#### 方法 B: 既存の.zshrc に追記
+#### 方法 B: コマンドで自動追記
 
 ```bash
 cat .zshrc >> ~/.zshrc
 ```
 
+**注意**: この方法は既存の設定に追加されますが、重複する設定がある場合は手動で確認・調整してください。
+
 #### 方法 C: シンボリックリンクを作成（開発者向け）
+
+**警告**: この方法は既存の`.zshrc`を完全に置き換えます。既存の設定が失われるため、必ずバックアップを取ってから実行してください。
 
 ```bash
 ln -sf "$(pwd)/.zshrc" ~/.zshrc
@@ -170,10 +190,6 @@ source ~/.zshrc
 - macOS
 - zsh
 - Git（ブランチ表示機能を使用する場合）
-
-## ライセンス
-
-このプロジェクトは MIT ライセンスの下で公開されています。
 
 ## 貢献
 
